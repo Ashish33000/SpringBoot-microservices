@@ -1,10 +1,10 @@
 package com.masai.Exception;
 
-public class UserException extends RuntimeException {
-	public UserException() {
+public class HotelException extends RuntimeException {
+	public HotelException() {
 		// TODO Auto-generated constructor stub
 	}
-	public UserException(String message) {
+	public HotelException(String message) {
 		// TODO Auto-generated constructor stub
 		super(message);
 	}

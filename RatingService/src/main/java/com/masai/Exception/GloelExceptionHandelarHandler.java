@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GloelExceptionHandelarHandler {
-	@ExceptionHandler(UserException.class)
-	public ResponseEntity<ApiResponse> handlerUserException(UserException ee){
+	@ExceptionHandler(RatingException.class)
+	public ResponseEntity<ApiResponse> handlerUserException(RatingException ee){
 	String message=ee.getMessage();
 	ApiResponse response= ApiResponse.builder().message(message).sucess(true).status(HttpStatus.NOT_FOUND).build();
 	return new ResponseEntity<>(response,HttpStatus.NOT_FOUND);
