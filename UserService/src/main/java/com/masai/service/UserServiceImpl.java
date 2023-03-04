@@ -1,6 +1,5 @@
 package com.masai.service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -17,6 +16,7 @@ import com.masai.Exception.UserException;
 import com.masai.entity.Hotel;
 import com.masai.entity.Rating;
 import com.masai.entity.User;
+import com.masai.external.services.HotelService;
 import com.masai.repository.UserRepoaitory;
 @Service
 public class UserServiceImpl implements Userservice {
@@ -26,6 +26,9 @@ public class UserServiceImpl implements Userservice {
 
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private HotelService hotelService;
 	
 	private Logger logger=LoggerFactory.getLogger(Userservice.class);
 	
@@ -50,14 +53,14 @@ public class UserServiceImpl implements Userservice {
 		//fetch rating of the above user from rating service
 		//http://localhost:8087/ratings/users/6155e81f-7000-49b3-a0fb-019e93ca99f0
 	   Rating[] ratingofUser=restTemplate.getForObject("http://RATING-SERVICE/ratings/users/"+user.getUserId(), Rating[].class);
-		logger.info("{} ",ratingofUser);
+		//logger.info("{}",ratingofUser);
 		List<Rating> ratings=Arrays.stream(ratingofUser).toList();
 		
 		List<Rating> ratingList=ratings.stream().map(rating->{
 			//http://localhost:8089/hotels/869f507b-7a86-4715-b75a-dcf7e7a820f4
-		ResponseEntity<Hotel> forEntity=restTemplate.getForEntity("http://HOTEL-SERVICE/hotels/"+rating.getHotelId(), Hotel.class);
-		Hotel hotel=forEntity.getBody();
-		logger.info("response statux code: {}",forEntity.getStatusCode());
+		//ResponseEntity<Hotel> forEntity=restTemplate.getForEntity("http://HOTEL-SERVICE/hotels/"+rating.getHotelId(), Hotel.class);
+		Hotel hotel=hotelService.getHotel(rating.getHotelId());
+		//logger.info("response statux code: {}",forEntity.getStatusCode());
 		
 			rating.setHotel(hotel);
 			

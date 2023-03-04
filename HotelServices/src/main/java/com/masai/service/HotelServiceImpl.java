@@ -29,9 +29,9 @@ public class HotelServiceImpl implements HotelService {
 	}
 
 	@Override
-	public Hotel getSingleHotel(String id) {
+	public Hotel getSingleHotel(String hotelId) {
 		// TODO Auto-generated method stub
-		return hotelRepo.findById(id).orElseThrow(()->new HotelException("Hotel not found with id: "+id));
+		return hotelRepo.findById(hotelId).orElseThrow(()->new HotelException("Hotel not found with id: "+hotelId));
 	}
 
 }

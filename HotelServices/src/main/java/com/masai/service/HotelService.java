@@ -8,6 +8,6 @@ public interface HotelService {
 	
 	public Hotel createHotel(Hotel hotel);
 	public List<Hotel> getAllHotel();
-	public Hotel getSingleHotel(String id);
+	public Hotel getSingleHotel(String hotelId);
 
 }
