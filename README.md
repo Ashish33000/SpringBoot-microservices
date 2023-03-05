@@ -1,2 +1,2 @@
-# SpringBoot-mictoservices
+# SpringBoot-microservices
 HotelServices
